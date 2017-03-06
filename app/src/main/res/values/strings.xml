@@ -109,4 +109,19 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="sign_up">Sign up</string>
+    <string name="first_name">First Name</string>
+    <string name="tfirst_name">First Name</string>
+    <string name="tlast_name">Last Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="student_email">Student Email</string>
+    <string name="tstudent_email">Student Email</string>
+    <string name="password">Password</string>
+    <string name="tpassword">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="tconfirm_password">Confirm Password</string>
+    <string name="signup">SignUp</string>
+    <string name="hpassword">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="not_a_member_register">Not a Member? Register.</string>
 </resources>
