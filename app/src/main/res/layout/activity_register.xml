@@ -70,13 +70,12 @@
 
             android:ems="10"
 
-            android:inputType="textPersonName" >
+            android:inputType="textPersonName" />
 
 
 
             <requestFocus />
 
-        </EditText>
 
 
 
@@ -150,7 +149,6 @@
 
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:hint="@string/tpassword" />
-
 
 
         <EditText
