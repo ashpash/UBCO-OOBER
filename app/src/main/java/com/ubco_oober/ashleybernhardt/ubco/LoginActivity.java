@@ -29,7 +29,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +41,7 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,21 +53,21 @@ public class LoginActivity extends AppCompatActivity{
         final Button bSignIn = (Button) findViewById(R.id.bSignIn);
         final TextView registerLink = (TextView) findViewById(R.id.registerLink);
 
-        registerLink.setOnClickListener(new View.OnClickListener(){
+        registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginActivity.this, Register.class);
                 LoginActivity.this.startActivity(registerIntent);
             }
         });
 
-        bSignIn.setOnClickListener(new View.OnClickListener(){
+        bSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = etEmail.getText().toString();
+                final String studentEmail = etEmail.getText().toString();
                 final String password = etPassword.getText().toString();
 
-                final Response.Listener<String> responseListener = new Response.Listener<String>() {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -73,8 +75,14 @@ public class LoginActivity extends AppCompatActivity{
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
-                                String email = jsonResponse.getString("studentEmail");
+                                String studentEmail = jsonResponse.getString("studentEmail");
                                 String password = jsonResponse.getString("password");
+
+                                Intent intent = new Intent(LoginActivity.this, ScrollingActivity.class);
+                                intent.putExtra("studentEmail", studentEmail);
+                                intent.putExtra("password", password);
+
+                                LoginActivity.this.startActivity(intent);
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("Failed to Login")
@@ -82,17 +90,21 @@ public class LoginActivity extends AppCompatActivity{
                                         .create()
                                         .show();
                             }
-                        } catch (JSONException e)
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
 
-                LoginRequest loginRequest = new LoginRequest(studentEmail,password, responseListener);
+                };
+                LoginRequest loginRequest = new LoginRequest(studentEmail, password, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                queue.add(loginRequest);
+
             }
-
-
+        });
     }
-    }
+}
 
 
 
