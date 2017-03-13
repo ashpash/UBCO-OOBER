@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
+
+import com.android.volley.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +59,40 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
+        bSignIn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                final String email = etEmail.getText().toString();
+                final String password = etPassword.getText().toString();
+
+                final Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+
+                            if (success) {
+                                String email = jsonResponse.getString("studentEmail");
+                                String password = jsonResponse.getString("password");
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setMessage("Failed to Login")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+                        } catch (JSONException e)
+
+                    }
+                }
+
+                LoginRequest loginRequest = new LoginRequest(studentEmail,password, responseListener);
+            }
+
+
     }
-}
+    }
 
 
 

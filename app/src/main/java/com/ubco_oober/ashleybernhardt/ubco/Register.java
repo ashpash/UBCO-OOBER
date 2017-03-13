@@ -14,12 +14,25 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
-
-import static com.ubco_oober.ashleybernhardt.ubco.R.id.etlName;
 
 
 public class Register extends AppCompatActivity {
+
+
+
+    public static boolean isEmailValid(String studentEmail){
+        String email = "@alumni.ubc.ca";
+        if (studentEmail.contains(email)){
+            return true;
+        }else{
+            return false;}
+    }
+
+    public static boolean passwordMatch(String e1, String e2){
+        if (e1.equals(e2)){
+            return true;}
+            else {return false;}
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,38 +53,49 @@ public class Register extends AppCompatActivity {
                 final String fName = etfName.getText().toString();
                 final String lName = etlName.getText().toString();
                 final String studentEmail = etEmail.getText().toString();
+                final boolean checkEmail = isEmailValid(studentEmail);
                 final String password = etPassword.getText().toString();
                 final String cPassword = etcPassword.getText().toString();
+                final boolean pwMatch = passwordMatch(password, cPassword);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                       try {
-                           JSONObject jsonResponse = new JSONObject(response);
-                           boolean success = jsonResponse.getBoolean("success");
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
 
-                           if (success) {
-                               Intent intent = new Intent(Register.this, LoginActivity.class);
-                               Register.this.startActivity(intent);
-                           } else {
-                               AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                               builder.setMessage("Failed to Register")
-                                       .setNegativeButton("Retry", null)
-                                       .create()
-                                       .show();
+                            if (success) {
+                                Intent intent = new Intent(Register.this, LoginActivity.class);
+                                Register.this.startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+                                builder.setMessage("Failed to Register")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
 
-                           }
-                       } catch(JSONException e){
-                           e.printStackTrace();
-                       }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 };
 
-                RegisterRequest registerRequest = new RegisterRequest(fName, lName, studentEmail, password, cPassword, responseListener );
-                RequestQueue queue = Volley.newRequestQueue(Register.this);
+                if (checkEmail && pwMatch ) {
+
+                    RegisterRequest registerRequest = new RegisterRequest(fName, lName, studentEmail, password, cPassword, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(Register.this);
                     queue.add(registerRequest);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+                    builder.setMessage("Bad Email or Password Match")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                }
             }
         });
 
