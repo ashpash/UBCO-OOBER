@@ -63,26 +63,26 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
 
-                            if (success) {
-                                Intent intent = new Intent(Register.this, LoginActivity.class);
-                                Register.this.startActivity(intent);
-                            } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                                builder.setMessage("Failed to Register")
-                                        .setNegativeButton("Retry", null)
-                                        .create()
-                                        .show();
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    if (success) {
+                        Intent intent = new Intent(Register.this, LoginActivity.class);
+                        Register.this.startActivity(intent);
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+                        builder.setMessage("Failed to Register")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
 
                     }
-                };
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
 
                 if (checkEmail && pwMatch ) {
 
