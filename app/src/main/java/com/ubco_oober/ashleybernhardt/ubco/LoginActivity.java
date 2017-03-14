@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                 LoginActivity.this.startActivity(intent);
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Failed to Login")
+                                builder.setMessage("Failed to Login. Incorrect Email/Password combination.")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();
