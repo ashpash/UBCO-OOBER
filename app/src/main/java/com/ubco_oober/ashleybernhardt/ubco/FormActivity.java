@@ -34,7 +34,7 @@ public class FormActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    // public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
 
     @Override
@@ -52,9 +52,9 @@ public class FormActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-                String Date = etDate.getText().toString();
+                final String Date = etDate.getText().toString();
+                final String studentEmail = getIntent().getStringExtra("studentEmail");
                 final String Destination = etDestination.getText().toString();
                 final String Time = etTime.getText().toString();
                 final int Space = Integer.parseInt(etSpace.getText().toString());
@@ -69,8 +69,11 @@ public class FormActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
+
                                 Intent intent = new Intent(FormActivity.this, ScrollingActivity.class);
                                 FormActivity.this.startActivity(intent);
+
+
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);
                                 builder.setMessage("Form filled out Incorrecty. ")
@@ -85,7 +88,7 @@ public class FormActivity extends AppCompatActivity {
 
                     }
                 };
-                FormRequest formRequest = new FormRequest(Destination, Date, Time, Space, responseListener);
+                FormRequest formRequest = new FormRequest(studentEmail, Destination, Date, Time, Space, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
                 queue.add(formRequest);
 

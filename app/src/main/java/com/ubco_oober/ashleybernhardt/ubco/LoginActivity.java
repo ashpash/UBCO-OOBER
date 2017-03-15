@@ -78,11 +78,11 @@ public class LoginActivity extends AppCompatActivity {
                                 String studentEmail = jsonResponse.getString("studentEmail");
                                 String password = jsonResponse.getString("password");
 
-                                Intent intent = new Intent(LoginActivity.this, ScrollingActivity.class); /// Change once merged to reflect main screen to start on
+                                Intent intent = new Intent(LoginActivity.this, FormActivity.class); /// Change once merged to reflect main screen to start on
                                 intent.putExtra("studentEmail", studentEmail);
                                 intent.putExtra("password", password);
-
                                 LoginActivity.this.startActivity(intent);
+
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("Failed to Login. Incorrect Email/Password combination.")
