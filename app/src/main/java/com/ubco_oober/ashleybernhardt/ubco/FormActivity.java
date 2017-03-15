@@ -55,12 +55,6 @@ public class FormActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
                 String Date = etDate.getText().toString();
-                Date myDate;
-                myDate = dateFormat.parse(Date);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(myDate);
-                cal.get(Calendar.DAY_OF_MONTH);
-
                 final String Destination = etDestination.getText().toString();
                 final String Time = etTime.getText().toString();
                 final int Space = Integer.parseInt(etSpace.getText().toString());
@@ -98,7 +92,9 @@ public class FormActivity extends AppCompatActivity {
             }
 
         });
-
+    }
+}
+/*
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -108,7 +104,7 @@ public class FormActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    public Action getIndexApiAction() {
+   /* public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Form Page") // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
@@ -165,4 +161,4 @@ public class FormActivity extends AppCompatActivity {
 
     }
 }
-
+*/
