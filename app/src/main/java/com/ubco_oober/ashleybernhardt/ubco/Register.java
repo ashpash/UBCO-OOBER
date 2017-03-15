@@ -75,7 +75,6 @@ public class Register extends AppCompatActivity {
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -64,24 +64,16 @@
             android:ems="10"
             android:hint="Space available"
             android:inputType="number" />
+        <Button
+            android:id="@+id/bFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:onClick="button"
+            android:text="FINISH" />
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/bFinish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="1"
-                android:onClick="sendInfo"
-                android:text="FINISH" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
