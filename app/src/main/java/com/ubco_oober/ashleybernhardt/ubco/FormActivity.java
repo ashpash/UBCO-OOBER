@@ -117,8 +117,9 @@ public class FormActivity extends AppCompatActivity implements
             final String Destination = txtDestination.getText().toString();
             final String sDate = txtDate.getText().toString();
             final String sTime = txtTime.getText().toString();
-            //final String studentEmail = getIntent().getStringExtra("studentEmail");
-            final String studentEmail = "m7@alumni.ubc.ca";
+            Intent intent = getIntent();
+            Bundle b = intent.getExtras();
+            final String studentEmail = (String) b.get("studentEmail");
             Response.Listener<String> responseListener = new Response.Listener<String>() {
 
                 @Override
