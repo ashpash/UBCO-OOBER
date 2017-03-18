@@ -1,14 +1,21 @@
 package com.ubco_oober.ashleybernhardt.ubco;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,18 +30,24 @@ import org.json.JSONObject;
 
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class FormActivity extends AppCompatActivity {
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+import static android.R.attr.id;
+
+public class FormActivity extends AppCompatActivity implements
+        View.OnClickListener {
+
     private GoogleApiClient client;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+
+
+    Button btnDatePicker, btnTimePicker, btnFinish;
+    EditText txtDate, txtTime, txtDestination,etSpace;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
 
     @Override
@@ -42,21 +55,104 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
-        Button button = (Button) findViewById(R.id.bFinish);
-        final EditText etDestination = (EditText) findViewById(R.id.etDestination);
-        final EditText etDate = (EditText) findViewById(R.id.etDate);
-        final EditText etTime = (EditText) findViewById(R.id.etTime);
-        final EditText etSpace = (EditText) findViewById(R.id.etSpace);
+        btnDatePicker=(Button)findViewById(R.id.etButtonDate);
+        btnTimePicker=(Button)findViewById(R.id.etButtonTime);
+        txtDate=(EditText)findViewById(R.id.etDate);
+        txtTime=(EditText)findViewById(R.id.etTime);
+        etSpace = (EditText) findViewById(R.id.etSpace);
+        txtDestination = (EditText) findViewById(R.id.etDestination);
+        btnFinish =(Button)findViewById(R.id.bFinish);
+
+        btnDatePicker.setOnClickListener(this);
+        btnTimePicker.setOnClickListener(this);
+        btnFinish.setOnClickListener(this);
+
+    } @Override
+    public void onClick(View v) {
+
+        if (v == btnDatePicker) {
+
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
 
-                final String Date = etDate.getText().toString();
-                final String studentEmail = getIntent().getStringExtra("studentEmail");
-                final String Destination = etDestination.getText().toString();
-                final String Time = etTime.getText().toString();
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            txtDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                        }
+                    }, mYear, mMonth, mDay);datePickerDialog.show();
+        }
+        if (v == btnTimePicker) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            txtTime.setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+        if (v== btnFinish) {
+
+            final int Space = Integer.parseInt(etSpace.getText().toString());
+            final String Destination = txtDestination.getText().toString();
+            final String sDate = txtDate.getText().toString();
+            final String sTime = txtTime.getText().toString();
+            //final String studentEmail = getIntent().getStringExtra("studentEmail");
+            final String studentEmail = "m7@alumni.ubc.ca";
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
+
+                        if (success) {
+                            Intent intent = new Intent(FormActivity.this, ScrollingActivity.class);
+                            FormActivity.this.startActivity(intent);
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);
+                            builder.setMessage("FAILLLLLL")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+
+            FormRequest formRequest = new FormRequest(Destination, sDate, sTime, Space, studentEmail, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
+            queue.add(formRequest);
+        }
+    }
+
+}
+
+/*
                 final int Space = Integer.parseInt(etSpace.getText().toString());
 
 
@@ -88,7 +184,7 @@ public class FormActivity extends AppCompatActivity {
 
                     }
                 };
-                FormRequest formRequest = new FormRequest(studentEmail, Destination, Date, Time, Space, responseListener);
+                FormRequest formRequest = new FormRequest(studentEmail, Destination, dateTime, Space, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
                 queue.add(formRequest);
 
@@ -96,6 +192,7 @@ public class FormActivity extends AppCompatActivity {
 
         });
     }
+
 }
 /*
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -164,4 +261,5 @@ public class FormActivity extends AppCompatActivity {
 
     }
 }
+
 */
