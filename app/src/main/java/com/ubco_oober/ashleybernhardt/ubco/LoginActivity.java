@@ -75,8 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
-                                String studentEmail = jsonResponse.getString("studentEmail");
-                                String password = jsonResponse.getString("password");
 
                                 Intent intent = new Intent(LoginActivity.this, FormActivity.class); /// Change once merged to reflect main screen to start on
                                 intent.putExtra("studentEmail", studentEmail);

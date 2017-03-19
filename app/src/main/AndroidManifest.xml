@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".FormActivity">
         </activity>
+        <activity android:name=".RSS"></activity>
         <activity
             android:name=".Navigation"
             android:label="@string/title_activity_navigation"

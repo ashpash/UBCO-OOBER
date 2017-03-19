@@ -129,7 +129,7 @@ public class FormActivity extends AppCompatActivity implements
                         boolean success = jsonResponse.getBoolean("success");
 
                         if (success) {
-                            Intent intent = new Intent(FormActivity.this, ScrollingActivity.class);
+                            Intent intent = new Intent(FormActivity.this, RSS.class);
                             FormActivity.this.startActivity(intent);
                         } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);
