@@ -12,83 +12,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:contextClickable="false"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:weightSum="1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-
-        <EditText
-            android:id="@+id/etDestination"
-            android:layout_width="324dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:ems="10"
-            android:hint="Destination"
-            android:inputType="text" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="150dp">
 
 
-        <EditText
-            android:id="@+id/etSpace"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Space available"
-            android:layout_below="@+id/etDestination"
-            />
-
-        <Button
-            android:id="@+id/etButtonDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/etDate"
-            android:layout_toRightOf="@+id/etDate"
-            android:layout_toEndOf="@+id/etDate"
-            android:text="Departure Date"/>
-
-        <EditText
-            android:id="@+id/etDate"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etDestination"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
-
-        <Button
-            android:id="@+id/etButtonTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/etTime"
-            android:layout_toRightOf="@+id/etTime"
-            android:layout_toEndOf="@+id/etTime"
-            android:text="Departure Time" />
-
-        <EditText
-            android:id="@+id/etTime"
-            android:layout_width="219dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="82dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="0.03" />
-
-        <Button
-            android:id="@+id/bFinish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:onClick="button"
-            android:text="FINISH" />
 
         <!--  <EditText
               android:id="@+id/etDateTime"
@@ -124,6 +55,81 @@
               android:inputType="time" /> -->
 
 
+        <EditText
+            android:id="@+id/etDestination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Destination"
+            android:inputType="text"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.03" />
+
+        <EditText
+            android:id="@+id/etSpace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Space available"
+            android:layout_below="@+id/etDestination"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.03" />
+
+        <Button
+            android:id="@+id/etButtonDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Departure Date"
+            android:layout_below="@+id/etSpace"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/etButtonDate"
+            android:layout_toRightOf="@+id/etButtonDate"
+            android:layout_toEndOf="@+id/etButtonDate"
+            android:gravity="right" />
+
+        <Button
+            android:id="@+id/etButtonTime"
+            android:layout_width="match_parent"
+            android:layout_gravity="right"
+            android:layout_height="wrap_content"
+            android:text="Departure Time"
+            android:layout_below="@+id/etButtonDate"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/etDate"
+            android:layout_toStartOf="@+id/etDate"
+            android:layout_weight="0.03" />
+
+        <EditText
+            android:id="@+id/etTime"
+            android:layout_width="match_parent"
+            android:layout_gravity="right"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.03"
+            android:layout_alignBottom="@+id/etButtonTime"
+            android:layout_toRightOf="@+id/etButtonDate"
+            android:layout_alignRight="@+id/etDate"
+            android:layout_alignEnd="@+id/etDate" />
+
+        <Button
+            android:id="@+id/bFinish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="button"
+            android:text="FINISH"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/etButtonDate"
+            android:layout_toEndOf="@+id/etButtonDate" />
     </LinearLayout>
 
 </RelativeLayout>
