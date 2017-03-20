@@ -54,13 +54,7 @@ public class FormActivity extends AppCompatActivity {
         Intent notificationIntent = new Intent(context,FormActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context,notification_id,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder = new NotificationCompat.Builder(context);
-        builder.setSmallIcon(R.mipmap.ic_launcher)
-                .setAutoCancel(true)
-                .setCustomContentView(remoteViews)
-                .setContentIntent(pendingIntent);
 
-        notificationManager.notify(notification_id,builder.build());
 
         //place inputted text into variables
         final EditText etDestination = (EditText) findViewById(R.id.etDestination);
@@ -69,6 +63,20 @@ public class FormActivity extends AppCompatActivity {
         String[] message = new String[3];
 
         Form exampleForm = new Form(etDestination.getText().toString(),etSpace.getText().toString(),etTime.getText().toString());
+
+        remoteViews.setTextViewText(R.id.notif_destination,exampleForm.getDestination());
+        remoteViews.setTextViewText(R.id.notif_time,exampleForm.getTime());
+        remoteViews.setTextViewText(R.id.notif_space,exampleForm.getSpace());
+
+        builder = new NotificationCompat.Builder(context);
+        builder.setSmallIcon(R.mipmap.ic_launcher)
+                .setAutoCancel(true)
+                .setCustomContentView(remoteViews)
+                .setContentIntent(pendingIntent);
+
+        notificationManager.notify(notification_id,builder.build());
+
+
 
         intent.putExtra(EXTRA_MESSAGE, (Parcelable) exampleForm);
 
