@@ -2,18 +2,23 @@ package com.ubco_oober.ashleybernhardt.ubco;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RemoteViews;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -44,6 +49,11 @@ public class FormActivity extends AppCompatActivity implements
     private GoogleApiClient client;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
+    private NotificationCompat.Builder builder;
+    private NotificationManager notificationManager;
+    private int notification_id;
+    private RemoteViews remoteViews;
+    private Context context;
 
     Button btnDatePicker, btnTimePicker, btnFinish;
     EditText txtDate, txtTime, txtDestination,etSpace;
@@ -66,6 +76,17 @@ public class FormActivity extends AppCompatActivity implements
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
+
+        context = this;
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        remoteViews = new RemoteViews(getPackageName(),R.layout.ride_notification);
+
+        notification_id = (int) Math.random()*100;
+        Intent button_Intent = new Intent("button_clicked");
+        button_Intent.putExtra("id",notification_id);
+
+        PendingIntent p_button_intent = PendingIntent.getBroadcast(context,123,button_Intent,0);
+        remoteViews.setOnClickPendingIntent(R.id.notif_button, p_button_intent);
 
     } @Override
     public void onClick(View v) {
@@ -129,6 +150,23 @@ public class FormActivity extends AppCompatActivity implements
                         boolean success = jsonResponse.getBoolean("success");
 
                         if (success) {
+                            //pendingIntent allows the notifcation to know where to go if you click the whitespace
+//                            Intent notificationIntent = new Intent(context,RSS.class);
+//                            PendingIntent pendingIntent = PendingIntent.getActivity(context,notification_id,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+                            remoteViews.setTextViewText(R.id.notif_destination,Destination);
+                            remoteViews.setTextViewText(R.id.notif_time,sDate);
+                            remoteViews.setTextViewText(R.id.notif_space,sTime);
+
+                            builder = new NotificationCompat.Builder(context);
+                            builder.setSmallIcon(R.mipmap.ic_launcher)
+                                    .setAutoCancel(false)
+                                    .setCustomContentView(remoteViews);
+                            //setContentIntent(Intent) is what intent you want to go to when clicking whitespace
+//                                    .setContentIntent(pendingIntent);
+
+                            notificationManager.notify(notification_id,builder.build());
+
                             Intent intent = new Intent(FormActivity.this, RSS.class);
                             FormActivity.this.startActivity(intent);
                         } else {
@@ -147,6 +185,7 @@ public class FormActivity extends AppCompatActivity implements
 
             FormRequest formRequest = new FormRequest(Destination, sDate, sTime, Space, studentEmail, responseListener);
             RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
+
             queue.add(formRequest);
         }
     }
