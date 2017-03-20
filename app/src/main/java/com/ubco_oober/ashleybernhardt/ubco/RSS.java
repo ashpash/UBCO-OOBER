@@ -88,7 +88,7 @@ public class RSS extends Activity {
 
             for (int x = 0; x < js.length(); x++) {
                 jo = js.getJSONObject(x);
-                data[x] = jo.getString("destination") + "\n" + jo.getString("dateForm") + "\n" + jo.getString("timeForm") + "\n" + jo.getInt("space");
+                data[x] = "Destination: " + jo.getString("destination") + "\t Space: " + jo.getInt("space") + "\t Date: " + jo.getString("dateForm") + "\t Time" + jo.getString("timeForm");
             }
         } catch (Exception e) {
             e.printStackTrace();
