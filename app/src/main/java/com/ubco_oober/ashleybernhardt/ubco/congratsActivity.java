@@ -1,4 +1,4 @@
-package com.example.nick.myfirstapp;
+package com.ubco_oober.ashleybernhardt.ubco;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.example.nick.myfirstapp;
+package com.ubco_oober.ashleybernhardt.ubco;
 
 import android.os.Parcel;
 import android.os.Parcelable;
