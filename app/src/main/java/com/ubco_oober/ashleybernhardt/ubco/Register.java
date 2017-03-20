@@ -28,6 +28,14 @@ public class Register extends AppCompatActivity {
             return false;}
     }
 
+    public static boolean validAt (String studentEmail){
+        String em = "@";
+        if (studentEmail.contains(em)) {
+            return true;
+        }else{
+            return false; }
+    }
+
     public static boolean passwordMatch(String e1, String e2){
         if (e1.equals(e2)){
             return true;}
@@ -54,6 +62,7 @@ public class Register extends AppCompatActivity {
                 final String lName = etlName.getText().toString();
                 final String studentEmail = etEmail.getText().toString();
                 final boolean checkEmail = isEmailValid(studentEmail);
+                final boolean valid = validAt(studentEmail);
                 final String password = etPassword.getText().toString();
                 final String cPassword = etcPassword.getText().toString();
                 final boolean pwMatch = passwordMatch(password, cPassword);
@@ -69,6 +78,12 @@ public class Register extends AppCompatActivity {
                     if (success) {
                         Intent intent = new Intent(Register.this, LoginActivity.class);
                         Register.this.startActivity(intent);
+                    } else if (!success) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+                        builder.setMessage("Password already taken")
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
                         builder.setMessage("Failed to Register")
@@ -83,7 +98,7 @@ public class Register extends AppCompatActivity {
             }
         };
 
-                if (checkEmail && pwMatch ) {
+                if (checkEmail && pwMatch && valid ) {
 
                     RegisterRequest registerRequest = new RegisterRequest(fName, lName, studentEmail, password, cPassword, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(Register.this);

@@ -5,8 +5,11 @@ package com.ubco_oober.ashleybernhardt.ubco;
  */
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.renderscript.Allocation;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -32,7 +35,6 @@ public class RSS extends Activity {
     String line = null;
     String result = null;
     String[] data;
-
 
     @Override
     protected void onCreate(Bundle savedInstancesState) {

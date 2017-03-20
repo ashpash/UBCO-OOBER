@@ -43,6 +43,22 @@ import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static boolean isEmailValid(String studentEmail){
+        String email = "@alumni.ubc.ca";
+        if (studentEmail.contains(email)){
+            return true;
+        }else{
+            return false;}
+    }
+
+    public static boolean validAt (String studentEmail){
+        String em = "@";
+        if (studentEmail.contains(em)) {
+            return true;
+        }else{
+            return false; }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String studentEmail = etEmail.getText().toString();
+                final boolean checkEmail = isEmailValid(studentEmail);
+                final boolean valid = validAt(studentEmail);
                 final String password = etPassword.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -95,9 +113,18 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 };
+
+                if (checkEmail && valid ) {
                 LoginRequest loginRequest = new LoginRequest(studentEmail, password, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                queue.add(loginRequest);
+                queue.add(loginRequest); }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage("Not a Valid Email")
+                            .setNegativeButton("Retry", null)
+                            .create()
+                            .show();
+                }
 
             }
         });
