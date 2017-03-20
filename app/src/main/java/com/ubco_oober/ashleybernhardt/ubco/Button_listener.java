@@ -33,7 +33,7 @@ public class Button_listener extends BroadcastReceiver {
 
 
 
-        Toast.makeText(context, ":^)", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "let's go see some details :D", Toast.LENGTH_SHORT).show();
 
 
 

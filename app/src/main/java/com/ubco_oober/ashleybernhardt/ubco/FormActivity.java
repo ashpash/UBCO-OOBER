@@ -1,12 +1,10 @@
 package com.ubco_oober.ashleybernhardt.ubco;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -14,8 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RemoteViews;
-
-import com.ubco_oober.ashleybernhardt.ubco.R;
 
 public class FormActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
@@ -35,9 +31,11 @@ public class FormActivity extends AppCompatActivity {
 
         context = this;
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        remoteViews = new RemoteViews(getPackageName(),R.layout.custom_notification);
+        remoteViews = new RemoteViews(getPackageName(),R.layout.ride_notification);
 //        remoteViews.setImageViewResource(R.id.notif_icon,R.drawable.ic_menu_send);
-        remoteViews.setTextViewText(R.id.notif_title,"c u s t o m  b u i l t");
+        remoteViews.setTextViewText(R.id.notif_destination,"Sample destination");
+        remoteViews.setTextViewText(R.id.notif_time,"Sample departure time");
+        remoteViews.setTextViewText(R.id.notif_space,"Sample space");
 
 
         notification_id = (int) Math.random()*100;
