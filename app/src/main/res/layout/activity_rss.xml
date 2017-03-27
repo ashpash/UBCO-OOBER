@@ -23,11 +23,25 @@
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_menu_camera"
+       android:src="@drawable/ic_menu_camera"
+        app:elevation="4dp"
+
+        android:onClick="onClick"
+       />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:onClick="onClick2"
+        android:src="@drawable/ic_menu_manage"
+
         app:elevation="4dp" />
-
-
-
 
 
 </RelativeLayout>

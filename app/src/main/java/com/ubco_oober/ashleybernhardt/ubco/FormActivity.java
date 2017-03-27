@@ -87,7 +87,14 @@ public class FormActivity extends AppCompatActivity implements
 
 
 
-    } @Override
+    }
+
+    public void onClickRequestBegin(View view){
+        Intent intent = new Intent(this,RequestActivity.class);
+        startActivity(intent);
+
+    }
+    @Override
     public void onClick(View v) {
 
         if (v == btnDatePicker) {

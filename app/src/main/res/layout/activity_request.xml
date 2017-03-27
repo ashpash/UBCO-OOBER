@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".FormActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:contextClickable="false"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp">
+
+
+        <EditText
+            android:id="@+id/etDestinationRequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Destination"
+            android:inputType="text"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="100dp"
+            android:layout_weight="0.03" />
+
+
+
+
+
+
+        <Button
+            android:id="@+id/bFinish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickRequestFinish"
+            android:text="FINISH"
+            android:layout_marginTop="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/etButtonDate"
+            android:layout_toEndOf="@+id/etButtonDate" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

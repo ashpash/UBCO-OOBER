@@ -5,8 +5,10 @@ package com.ubco_oober.ashleybernhardt.ubco;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -49,6 +51,18 @@ public class RSS extends Activity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
         listview.setAdapter(adapter);
 
+
+    }
+
+    public void onClick(View view){
+
+        Intent intent = new Intent(this,FormActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClick2(View view){
+        Intent intent = new Intent(this,profileActivity.class);
+        startActivity(intent);
 
     }
 

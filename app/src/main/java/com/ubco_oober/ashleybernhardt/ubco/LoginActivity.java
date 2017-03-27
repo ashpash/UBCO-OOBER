@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             if (success) {
 
-                                Intent intent = new Intent(LoginActivity.this, FormActivity.class); /// Change once merged to reflect main screen to start on
+                                Intent intent = new Intent(LoginActivity.this, RSS.class); /// Change once merged to reflect main screen to start on
                                 intent.putExtra("studentEmail", studentEmail);
                                 intent.putExtra("password", password);
                                 LoginActivity.this.startActivity(intent);

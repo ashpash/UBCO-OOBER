@@ -132,6 +132,15 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/etButtonDate"
             android:layout_toEndOf="@+id/etButtonDate" />
+
+        <Button
+            android:id="@+id/bRequest"
+            android:text="Request Ride"
+            android:layout_width="157dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:onClick="onClickRequestBegin"
+            />
     </LinearLayout>
 
 </RelativeLayout>
