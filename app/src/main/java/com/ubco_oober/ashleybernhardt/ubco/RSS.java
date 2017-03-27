@@ -5,13 +5,17 @@ package com.ubco_oober.ashleybernhardt.ubco;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.renderscript.Allocation;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -51,7 +55,21 @@ public class RSS extends Activity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
         listview.setAdapter(adapter);
 
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Get selected item text
+                String item = (String) adapterView.getItemAtPosition(i);
+                String studentEmail = item.substring(item.indexOf("(") + 1, item.indexOf(")"));
+                Intent intent = new Intent(RSS.this, RideInfo.class);
+                intent.putExtra("studentEmail", studentEmail);
+                RSS.this.startActivity(intent);
 
+                // Display the selected item
+                //Toast.makeText(mContext,"Selected : " + item,Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
     private void getInfo() {
@@ -90,7 +108,7 @@ public class RSS extends Activity {
 
             for (int x = 0; x < js.length(); x++) {
                 jo = js.getJSONObject(x);
-                data[x] = jo.getString("destination") + "\n" + jo.getString("dateForm") + "\n" + jo.getString("timeForm") + "\n" + jo.getInt("space");
+                data[x] = "Email:("+jo.getString("studentEmail")+")"+"\n"+jo.getString("destination") + "\n" + jo.getString("dateForm") + "\n" + jo.getString("timeForm") + "\n" + jo.getInt("space");
             }
         } catch (Exception e) {
             e.printStackTrace();
