@@ -58,15 +58,28 @@ public class RSS extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent emailIntent = getIntent();
+                Bundle b = emailIntent.getExtras();
+                final String studentEmail = (String) b.get("studentEmail");
+
+
                 // Get selected item text
                 String item = (String) adapterView.getItemAtPosition(i);
-                String studentEmail = item.substring(item.indexOf("(") + 1, item.indexOf(")"));
-                Intent intent = new Intent(RSS.this, RideInfo.class);
-                intent.putExtra("studentEmail", studentEmail);
-                RSS.this.startActivity(intent);
+                String driverStudentEmail = item.substring(item.indexOf("Email:(") + 7, item.indexOf(")"));
+                String driveDate = item.substring(item.indexOf("Date:") + 5, item.indexOf("Time:"));
+                String driveTime = item.substring(item.indexOf("Time:") + 5, item.indexOf("|"));
+                String driveDestination = item.substring(item.indexOf("Destination:[") + 13, item.indexOf("]"));
 
-                // Display the selected item
-                //Toast.makeText(mContext,"Selected : " + item,Toast.LENGTH_SHORT).show();
+                //String driveDestination =
+                Intent intent = new Intent(RSS.this, RideInfo.class);
+                intent.putExtra("driverStudentEmail", driverStudentEmail);
+                intent.putExtra("driveDate", driveDate);
+                intent.putExtra("driveTime", driveTime);
+                intent.putExtra("driveDestination", driveDestination);
+                intent.putExtra("studentEmail", studentEmail);
+
+                RSS.this.startActivity(intent);
             }
 
         });
@@ -108,7 +121,9 @@ public class RSS extends Activity {
 
             for (int x = 0; x < js.length(); x++) {
                 jo = js.getJSONObject(x);
-                data[x] = "Email:("+jo.getString("studentEmail")+")"+"\n"+jo.getString("destination") + "\n" + jo.getString("dateForm") + "\n" + jo.getString("timeForm") + "\n" + jo.getInt("space");
+                data[x] = "Email:("+jo.getString("studentEmail")+")"+"\n"+ "Destination:["+jo.getString("destination")
+                        +"]"+"\n" + "Date:"+jo.getString("dateForm") +"\n" + "Time:"+jo.getString("timeForm")+"|"+"\n"+"Space:"+jo.getInt("space");
+               // int driveSpace = jo.getInt("space");
             }
         } catch (Exception e) {
             e.printStackTrace();

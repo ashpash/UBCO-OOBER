@@ -168,6 +168,7 @@ public class FormActivity extends AppCompatActivity implements
                             notificationManager.notify(notification_id,builder.build());
 
                             Intent intent = new Intent(FormActivity.this, RSS.class);
+                            intent.putExtra("studentEmail", studentEmail);
                             FormActivity.this.startActivity(intent);
                         } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);

@@ -124,4 +124,6 @@
     <string name="hpassword">Password</string>
     <string name="sign_in">Sign In</string>
     <string name="not_a_member_register">Not a Member? Register.</string>
+    <string name="join_ride">Join Ride</string>
+    <string name="date">Date</string>
 </resources>
