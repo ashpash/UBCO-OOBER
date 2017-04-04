@@ -14,11 +14,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name="Button_listener">
+        <service android:name=".myFirebaseInstanceIdService">
             <intent-filter>
-                <action android:name="button_clicked"></action>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVEN">
+                </action>
             </intent-filter>
-        </receiver>
+        </service>
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT">
+                </action>
+            </intent-filter>
+        </service>
+
+
 
         <activity
             android:name=".LoginActivity"

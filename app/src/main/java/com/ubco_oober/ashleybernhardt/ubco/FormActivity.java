@@ -85,8 +85,7 @@ public class FormActivity extends AppCompatActivity implements
         Intent button_Intent = new Intent("button_clicked");
         button_Intent.putExtra("id",notification_id);
 
-        PendingIntent p_button_intent = PendingIntent.getBroadcast(context,123,button_Intent,0);
-        remoteViews.setOnClickPendingIntent(R.id.notif_button, p_button_intent);
+
 
     } @Override
     public void onClick(View v) {
