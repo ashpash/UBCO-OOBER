@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "385754412117",
+    "firebase_url": "https://project-ubco-oober.firebaseio.com",
+    "project_id": "project-ubco-oober",
+    "storage_bucket": "project-ubco-oober.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385754412117:android:56e0adc0ce82e493",
+        "android_client_info": {
+          "package_name": "com.ubco_oober.ashleybernhardt.ubco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385754412117-v095dmcbb4ojjceuk700909vfd5c8qlr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ubco_oober.ashleybernhardt.ubco",
+            "certificate_hash": "2da28106f22365002c9317a005a897f87aba07aa"
+          }
+        },
+        {
+          "client_id": "385754412117-e5o8vk4parsnt716trsmkv07mv8r9oqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbs3pgl8Gsw4hpuwf8RBA0xe-Pm4lmUs4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385754412117-e5o8vk4parsnt716trsmkv07mv8r9oqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,6 +19,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.ubco_oober.ashleybernhardt.ubco.R.styleable.AlertDialog;
+
 /**
  * Created by Ashley on 3/26/2017.
  */
@@ -26,7 +28,7 @@ import org.json.JSONObject;
 public class RideInfo extends AppCompatActivity implements View.OnClickListener {
 
     private GoogleApiClient client;
-    Button btnJoinRide;
+    Button btnJoinRide, btnLeaveRide;
     String driverStudentEmail, driveDestination, driveTime,driveDate,studentEmail;
 
 
@@ -40,6 +42,7 @@ public class RideInfo extends AppCompatActivity implements View.OnClickListener 
         TextView time = (TextView) findViewById(R.id.time);
         TextView date = (TextView) findViewById(R.id.date);
         btnJoinRide = (Button) findViewById(R.id.joinRideButton);
+        btnLeaveRide = (Button) findViewById(R.id.btnRemove);
 
 
         Intent intent = getIntent();
@@ -54,53 +57,101 @@ public class RideInfo extends AppCompatActivity implements View.OnClickListener 
         destination.setText(driveDestination);
 
         btnJoinRide.setOnClickListener(this);
+        btnLeaveRide.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
-        Intent intent = getIntent();
-        Bundle b = intent.getExtras();
-        studentEmail = (String) b.get("studentEmail");
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
+        if (v == btnLeaveRide) {
 
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    boolean success = jsonResponse.getBoolean("success");
-                   // boolean space = jsonResponse.getBoolean("space");
+            Intent intent = getIntent();
+            Bundle b = intent.getExtras();
+            studentEmail = (String) b.get("studentEmail");
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
 
-                   /* if(space) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(RideInfo.this);
-                        builder.setMessage("There was Space")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
-                    }*/
-                    if (success) {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
+                        boolean notInRide = jsonResponse.getBoolean("notInRide");
 
-                        Intent intent = new Intent(RideInfo.this, RSS.class);
-                        intent.putExtra("studentEmail", studentEmail);
-                        RideInfo.this.startActivity(intent);
+                        if (!notInRide) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RideInfo.this);
+                            builder.setMessage("Ride Removal Successful!")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show() ;
 
-                    } else {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(RideInfo.this);
-                        builder.setMessage("FAILLLLLL")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
+                            Intent intent = new Intent(RideInfo.this, RSS.class);
+                            intent.putExtra("studentEmail", studentEmail);
+                            RideInfo.this.startActivity(intent);
+
+                        } else if (notInRide){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RideInfo.this);
+                            builder.setMessage("Ride Removal Failed, You are not a Passenger in this Ride")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show() ;
+
+                        }else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RideInfo.this);
+                            builder.setMessage("FAILLLLLL")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        };
+            };
 
-        AddRideRequest addRideRequest = new AddRideRequest(driveDestination, driverStudentEmail, driveTime, driveDate, studentEmail, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(RideInfo.this);
+            rideRemoveRequest rideRemoveRequest = new rideRemoveRequest(driveDestination, driverStudentEmail, driveTime, driveDate, studentEmail, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(RideInfo.this);
 
-        queue.add(addRideRequest);
+            queue.add(rideRemoveRequest);
+
+        }
+
+        if (v == btnJoinRide) {
+
+            Intent intent = getIntent();
+            Bundle b = intent.getExtras();
+            studentEmail = (String) b.get("studentEmail");
+            Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean success = jsonResponse.getBoolean("success");
+
+                        if (success) {
+
+                            Intent intent = new Intent(RideInfo.this, RSS.class);
+                            intent.putExtra("studentEmail", studentEmail);
+                            RideInfo.this.startActivity(intent);
+
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RideInfo.this);
+                            builder.setMessage("FAILLLLLL")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            AddRideRequest addRideRequest = new AddRideRequest(driveDestination, driverStudentEmail, driveTime, driveDate, studentEmail, responseListener);
+            RequestQueue queue = Volley.newRequestQueue(RideInfo.this);
+
+            queue.add(addRideRequest);
+        }
     }
 
 }
