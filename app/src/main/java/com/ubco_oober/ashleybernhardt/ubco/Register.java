@@ -80,7 +80,7 @@ public class Register extends AppCompatActivity {
                         Register.this.startActivity(intent);
                     } else if (!success) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                        builder.setMessage("Password already taken")
+                        builder.setMessage("Email already in use")
                                 .setNegativeButton("Retry", null)
                                 .create()
                                 .show();
