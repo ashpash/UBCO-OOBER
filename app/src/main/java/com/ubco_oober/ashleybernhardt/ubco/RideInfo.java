@@ -130,6 +130,11 @@ public class RideInfo extends AppCompatActivity implements View.OnClickListener 
 
                         if (success) {
 
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RideInfo.this);
+                            builder.setMessage("Welcome Aboard!")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show() ;
                             Intent intent = new Intent(RideInfo.this, RSS.class);
                             intent.putExtra("studentEmail", studentEmail);
                             RideInfo.this.startActivity(intent);
