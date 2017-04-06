@@ -2,39 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
-    android:background="#CFD8DC"
+
     tools:context=".Register" >
 
-    <android.support.v7.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="@android:color/transparent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        app:cardElevation="6dp"
-        app:cardCornerRadius="5dp">
-        <!--
-        app:cardBackgroundColor="@android:color/transparent"
-                android:backgroundTint="#E0E0E0"
-
-        android:backgroundTint="#CFD8DC"
-        android:backgroundTintMode="src_over"
-        -->
 
 
-        <!-- put whatever you want -->
+   <LinearLayout
 
-        <include layout="@layout/register_header"/>
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
 
@@ -46,35 +25,51 @@
 
         android:layout_alignParentTop="true"
 
-        android:orientation="vertical"
+        android:orientation="vertical" >
 
-        android:layout_marginTop="20dp">
+
+
+        <TextView
+
+            android:id="@+id/textView1"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal"
+
+            android:text="@string/sign_up"
+
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+
+
+        <TextView
+
+            android:id="@+id/fName"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="@string/first_name"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:hint="@string/tfirst_name" />
+
 
 
         <EditText
 
             android:id="@+id/etfName"
 
-            android:padding="15dp"
-
-            android:layout_marginLeft="10dp"
-
-            android:layout_marginRight="10dp"
-
-            android:layout_marginTop="70dp"
-
-            android:layout_marginBottom="10dp"
-
-            android:background="@drawable/round"
-
             android:layout_width="match_parent"
-
-            android:hint="First Name"
 
             android:layout_height="wrap_content"
 
             android:ems="10"
-            android:textSize="16sp"
+
             android:inputType="textPersonName" />
 
 
@@ -83,52 +78,54 @@
 
 
 
+
+        <TextView
+
+            android:id="@+id/lName"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="@string/tlast_name"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:hint="@string/last_name" />
+
+
+
         <EditText
 
             android:id="@+id/etlName"
-
-            android:padding="15dp"
-
-            android:layout_marginLeft="10dp"
-
-            android:layout_marginRight="10dp"
-
-            android:layout_marginTop="10dp"
-
-            android:layout_marginBottom="10dp"
-
-            android:background="@drawable/round"
-
-            android:hint="Last Name"
 
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
 
             android:ems="10"
-            android:textSize="16sp"
+
             android:inputType="textPersonName" />
+
+
+
+        <TextView
+
+            android:id="@+id/Email"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="@string/student_email"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:hint="@string/tstudent_email" />
 
 
 
         <EditText
 
             android:id="@+id/etEmail"
-
-            android:padding="15dp"
-
-            android:textSize="16sp"
-            android:layout_marginLeft="10dp"
-
-            android:layout_marginRight="10dp"
-
-            android:layout_marginTop="10dp"
-
-            android:layout_marginBottom="10dp"
-
-            android:background="@drawable/round"
-
-            android:hint="Email"
 
             android:layout_width="match_parent"
 
@@ -139,51 +136,52 @@
             android:inputType="textEmailAddress" />
 
 
+
+        <TextView
+
+            android:id="@+id/Password"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="@string/password"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:hint="@string/tpassword" />
+
+
         <EditText
 
             android:id="@+id/etPassword"
 
-            android:padding="15dp"
-
-            android:layout_marginLeft="10dp"
-
-            android:layout_marginRight="10dp"
-
-            android:layout_marginTop="10dp"
-
-            android:layout_marginBottom="10dp"
-
-            android:background="@drawable/round"
-
-            android:hint="Password"
-
             android:layout_width="match_parent"
-            android:textSize="16sp"
+
             android:layout_height="wrap_content"
 
             android:ems="10"
 
             android:inputType="textPassword" />
+
+        <TextView
+
+            android:id="@+id/cPassword"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="@string/confirm_password"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:hint="@string/tconfirm_password" />
+
 
 
         <EditText
 
             android:id="@+id/etcPassword"
 
-            android:padding="15dp"
-
-            android:layout_marginLeft="10dp"
-
-            android:layout_marginRight="10dp"
-
-            android:layout_marginTop="10dp"
-
-            android:layout_marginBottom="10dp"
-            android:textSize="16sp"
-            android:background="@drawable/round"
-
-            android:hint="Confirm Password"
-
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
@@ -192,8 +190,13 @@
 
             android:inputType="textPassword" />
 
-        
-<!--        <Button
+
+
+
+
+
+
+        <Button
 
             android:id="@+id/bRegister"
 
@@ -205,44 +208,8 @@
 
             android:onClick="bRegister"
 
-            android:text="@string/signup" />-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/rounded"
-
-            android:layout_marginLeft="10dp"
-
-            android:layout_marginRight="10dp"
-
-            android:layout_marginTop="10dp"
-
-            android:layout_marginBottom="20dp"
-
-            android:layout_alignParentBottom="true">
-
-            <Button
-                android:id="@+id/bRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Register"
-                android:textColorHint="#fff"
-                android:textColor="#fff"
-                android:onClick="bRegister"
-                android:letterSpacing="0.0025"
-                android:textSize="16dp"
-                android:textAlignment="center"
-                android:background="#00000000"
-                android:padding="15dp"
-                android:ems="10" />
-
-        </LinearLayout>
+            android:text="@string/signup" />
 
     </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
 
 </RelativeLayout>
