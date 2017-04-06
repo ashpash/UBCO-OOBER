@@ -17,7 +17,16 @@
 
 
 
-
+    <ImageButton style="@style/AppTheme"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="New Button"
+        android:id="@+id/rideReq"
+        android:src="@drawable/addride"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="24dp"/>
 
 
 

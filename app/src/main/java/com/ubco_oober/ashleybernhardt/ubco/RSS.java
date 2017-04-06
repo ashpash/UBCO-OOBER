@@ -14,6 +14,8 @@ import android.renderscript.Allocation;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,11 +41,30 @@ public class RSS extends Activity {
     String line = null;
     String result = null;
     String[] data;
+    ImageButton btnReq;
 
     @Override
     protected void onCreate(Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);
         setContentView(R.layout.activity_rss);
+
+        btnReq =(ImageButton) findViewById(R.id.rideReq);
+        btnReq.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick (View v) {
+
+                Intent emailIntent = getIntent();
+                Bundle b = emailIntent.getExtras();
+                final String studentEmail = (String) b.get("studentEmail");
+
+                Intent intent = new Intent(RSS.this, rideSearch.class);
+                intent.putExtra("studentEmail", studentEmail);
+                RSS.this.startActivity(intent);
+            }
+        });
+
+
 
         listview = (ListView) findViewById(R.id.ListView);
 

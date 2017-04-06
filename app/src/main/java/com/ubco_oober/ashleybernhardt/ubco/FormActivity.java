@@ -88,6 +88,7 @@ public class FormActivity extends AppCompatActivity implements
         PendingIntent p_button_intent = PendingIntent.getBroadcast(context,123,button_Intent,0);
         remoteViews.setOnClickPendingIntent(R.id.notif_button, p_button_intent);
 
+
     } @Override
     public void onClick(View v) {
 
@@ -132,7 +133,28 @@ public class FormActivity extends AppCompatActivity implements
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
-        if (v== btnFinish) {
+        final int checkSpace = Integer.parseInt(etSpace.getText().toString());
+        final String checkDestination = txtDestination.getText().toString();
+        final String checkDate = txtDate.getText().toString();
+        final String checkTime = txtTime.getText().toString();
+
+        if (v== btnFinish && checkSpace>8 || checkSpace<1){
+            AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);
+            builder.setMessage("Fields Incorrectly filled out, Space can be no greater than 8!")
+                    .setNegativeButton("Retry", null)
+                    .create()
+                    .show();
+        }
+
+        if (v== btnFinish && (checkDate.isEmpty() || checkTime.isEmpty() || checkDestination.isEmpty())) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(FormActivity.this);
+            builder.setMessage("Empty Fields, Please Fill out all Information!")
+                    .setNegativeButton("Retry", null)
+                    .create()
+                    .show();
+        }
+
+        else if (v== btnFinish && checkSpace<8 && checkSpace>0 ) {
 
             final int Space = Integer.parseInt(etSpace.getText().toString());
             final String Destination = txtDestination.getText().toString();
@@ -189,6 +211,7 @@ public class FormActivity extends AppCompatActivity implements
 
             queue.add(formRequest);
         }
+
     }
 
 }
